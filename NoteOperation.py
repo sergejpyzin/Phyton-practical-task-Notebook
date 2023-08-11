@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 import Note
 
@@ -97,5 +98,18 @@ def remove_by_id(path):
             el_index = list_note.index(element)
             list_note.pop(el_index)
             print(f"Заметка с ID {being_deleted_id} удалена")
+    with open(path, "w") as fr:
+        json.dump(list_note, fr, ensure_ascii=False, indent=2)
+
+def change_note(path):
+    search_by_title(path)
+    list_note = File_operation.read_file(path)
+    id_note = input("Введите ID заметки для редактирования:\n")
+    for element in list_note:
+        if element["ID"] == id_note:
+            element["Содержание заметки"] = input("Введите новое содержание заметки:\n")
+            element["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
+            element["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
+            File_operation.output_element_to_console(element)
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
