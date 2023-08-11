@@ -47,3 +47,14 @@ def create_file(path):
         file.close()
     except FileNotFoundError:
         print("Создать файл не удалось")
+
+def output_list_note_to_console(path):
+    list_note = read_file(path)
+    for element in list_note:
+        output_element_to_console(element)
+
+
+def output_element_to_console(element):
+    print(f'ID {element["ID"]}, Заметка {element["Название заметки"]}\n '
+          f'\tТекст заметки: {element["Содержание заметки"]}\n\tДата создания/изменения: {element["Дата создания/изменения"]}, '
+          f'Время создания/изменения {element["Время создания/изменения"]};')
