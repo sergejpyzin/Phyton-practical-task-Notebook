@@ -36,3 +36,19 @@ def search_by_title(path):
             if element["Название заметки"] == searching_title:
                 print(element["ID"] + " " + element["Название заметки"])
         search_by_id(path)
+
+def search_by_id(path):
+    print("-------------------------------")
+    searching_id = input("Введите ID искомой заметки:\n")
+    list_note = File_operation.read_file(path)
+    count = 0
+    el_index = 0
+    for element in list_note:
+        if element["ID"] == searching_id:
+            count += 1
+    if count == 0:
+        print("Не найдено заметок с заданным ID!")
+    elif count == 1:
+        print("------------------------------")
+        print(f"Было найдена заметка с ID {searching_id}")
+        File_operation.output_element_to_console(list_note[el_index])
