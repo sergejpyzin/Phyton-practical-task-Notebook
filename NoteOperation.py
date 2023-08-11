@@ -127,3 +127,7 @@ def change_note(path):
             File_operation.output_element_to_console(element)
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
+
+def output_list_to_console(some_list):
+    for element in some_list:
+        File_operation.output_element_to_console(element)
