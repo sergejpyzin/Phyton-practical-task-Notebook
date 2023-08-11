@@ -40,3 +40,10 @@ def write_note_in_file(path):
         listObj.insert(0, NoteOperation.create_note().to_dict())
     with open(path, "w") as fr:
         json.dump(listObj, fr, ensure_ascii=False, indent=2)
+
+def create_file(path):
+    try:
+        file = open(path, "w+")
+        file.close()
+    except FileNotFoundError:
+        print("Создать файл не удалось")
