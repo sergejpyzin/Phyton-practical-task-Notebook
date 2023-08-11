@@ -67,6 +67,20 @@ def search_by_date(path):
         print("Не найдено заметок с заданной датой!")
     output_list_to_console(result_list)
 
+def search_by_occurrence(path):
+    answer_from_user = input("Введите слово которое должно содержаться в составе заметки:\n")
+    list_note = File_operation.read_file(path)
+    result_list = []
+    for element in list_note:
+        if answer_from_user in element["Название заметки"]:
+            result_list.append(element)
+        elif answer_from_user in element["Содержание заметки"]:
+            result_list.append(element)
+    if len(result_list) == 0:
+        print("\033[3m\033[31m{}\033[0m".format("Заметка содержащая данное слово не найдена!"))
+    else:
+        output_list_to_console(result_list)
+
 def remove_by_title(path):
     title = input("Введите название заметки которую хотите удалить:\n")
     list_note = File_operation.read_file(path)
