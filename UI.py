@@ -72,3 +72,22 @@ def change_note_menu():
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
+
+def search_menu():
+    print("+++++++++++++++++++++++++++++++++++++++")
+    if FileOperation.file_is_empty("Notebook.json"):
+        print("Меню выбора операции поиска заметок")
+        answer_from_user = input("Введите номер операции(\n1 - поиск по названию записки\n"
+                                 "2 - поиск по слову в составе заметки\n3 - поиск по дате создания/изменения):\n")
+        if answer_from_user == "1":
+            NoteOperation.search_by_title("Notebook.json")
+        elif answer_from_user == "2":
+            NoteOperation.search_by_occurrence("Notebook.json")
+        elif answer_from_user == "3":
+            NoteOperation.search_by_date("Notebook.json")
+        else:
+            print("\033[3m\033[31m{}\033[0m".format("Введенный номер пукта меню несуществует! Попробуйте ещё раз."))
+            search_menu()
+    else:
+        print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
+        create_menu()
