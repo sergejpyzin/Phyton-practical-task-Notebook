@@ -63,3 +63,26 @@ def search_by_date(path):
     if len(result_list) == 0:
         print("Не найдено заметок с заданной датой!")
     output_list_to_console(result_list)
+
+def remove_by_title(path):
+    title = input("Введите название заметки которую хотите удалить:\n")
+    list_note = File_operation.read_file(path)
+    count = 0
+    el_index = 0
+    for element in list_note:
+        if element["Название заметки"] == title.casefold():
+            count += 1
+            el_index = list_note.index(element)
+    if count == 0:
+        print("\033[3m\033[31m{}\033[0m".format("Записок для удаления не найдено."))
+    elif count == 1:
+        list_note.pop(el_index)
+        print(f"Заметка '{title}' удалена")
+        with open(path, "w") as fr:
+            json.dump(list_note, fr, ensure_ascii=False, indent=2)
+    else:
+        print(f"Было найдено {count} заметок с названием '{title}'")
+        for element in list_note:
+            if element["Название заметки"] == title.casefold():
+                print(element)
+        remove_by_id(path)
