@@ -45,3 +45,7 @@ def choice_menu():
     else:
         print("\033[3m\033[31m{}\033[0m".format("Введённый номер пукта меню несуществует! Попробуйте ещё раз."))
         choice_menu()
+
+def create_menu():
+    FileOperation.write_note_in_file("Notebook.json")
+    choice_menu()
