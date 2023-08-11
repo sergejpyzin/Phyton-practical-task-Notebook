@@ -1,6 +1,8 @@
 import json
 import os
 
+import NoteOperation
+
 
 def file_is_empty(path):
     if file_exists(path):
@@ -27,3 +29,14 @@ def read_file(path):
     if file_exists(path):
         with open(path) as file:
             return json.load(file)
+
+def write_note_in_file(path):
+    if file_is_empty(path):
+        with open(path) as fr:
+            listObj = json.load(fr)
+        listObj.insert(0, NoteOperation.create_note().to_dict())
+    else:
+        listObj = []
+        listObj.insert(0, NoteOperation.create_note().to_dict())
+    with open(path, "w") as fr:
+        json.dump(listObj, fr, ensure_ascii=False, indent=2)
