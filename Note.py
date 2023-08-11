@@ -3,7 +3,7 @@ import uuid
 
 
 class Note:
-    def __init__(self,title="Text", body="Text"):
+    def __init__(self, title="Text", body="Text"):
         self.title = title
         self.id = str(uuid.uuid4())[0:6]
         self.body = body
@@ -38,4 +38,3 @@ class Note:
         dictionari = {"Название заметки": self.title, "ID": self.id, "Содержание заметки": self.body,
                       "Дата создания/изменения": self.date, "Время создания/изменения": self.time}
         return dictionari
-
