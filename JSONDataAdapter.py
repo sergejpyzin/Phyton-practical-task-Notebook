@@ -15,3 +15,15 @@ class JSON_Data_Adapter:
                 "Дата создания/изменения": obj.date,
                 "Время создания/изменения": obj.time
             })
+
+    @staticmethod
+    def from_json(obj):
+        obj = json.loads(obj)
+        try:
+            title = obj["Название заметки"]
+            body = obj["Содержание заметки"]
+            note = Note(title, body)
+            return note
+
+        except AttributeError:
+            print("Неверная структура")
