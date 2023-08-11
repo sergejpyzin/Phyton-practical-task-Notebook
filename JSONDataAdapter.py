@@ -3,7 +3,7 @@ import json
 from Note import Note
 
 
-class JSON_Data_Adapter:
+class JSONDataAdapter:
 
     @staticmethod
     def to_json(obj):
