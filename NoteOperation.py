@@ -52,3 +52,14 @@ def search_by_id(path):
         print("------------------------------")
         print(f"Было найдена заметка с ID {searching_id}")
         File_operation.output_element_to_console(list_note[el_index])
+
+def search_by_date(path):
+    searching_date = input("Введите дату создания/изменения искомой заметки в формате dd.mm.yyyy :\n")
+    list_note = File_operation.read_file(path)
+    result_list = []
+    for element in list_note:
+        if element["Дата создания/изменения"] == searching_date:
+            result_list.append(element)
+    if len(result_list) == 0:
+        print("Не найдено заметок с заданной датой!")
+    output_list_to_console(result_list)
