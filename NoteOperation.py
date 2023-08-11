@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+import FileOperation
 import Note
 
 
@@ -11,6 +12,7 @@ def check_length_message(message):
     else:
         return message
 
+
 def create_note():
     title = check_length_message(input("Введите название заметки: "))
     body = check_length_message(input("Введите содержание заметки: "))
@@ -18,9 +20,10 @@ def create_note():
     print(f"Заметка с наименованием {title} создана")
     return Note.Note(title=title, body=body)
 
+
 def search_by_title(path):
     searching_title = input("Введите название искомой заметки:\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     count = 0
     el_index = 0
     for element in list_note:
@@ -32,7 +35,7 @@ def search_by_title(path):
     elif count == 1:
         print("------------------------------")
         print(f"Было найдена заметка с названием {searching_title}")
-        File_operation.output_element_to_console(list_note[el_index])
+        FileOperation.output_element_to_console(list_note[el_index])
     else:
         print(f"Было найдено {count} заметок с названием '{searching_title}'")
         for element in list_note:
@@ -40,10 +43,11 @@ def search_by_title(path):
                 print(element["ID"] + " " + element["Название заметки"])
         search_by_id(path)
 
+
 def search_by_id(path):
     print("-------------------------------")
     searching_id = input("Введите ID искомой заметки:\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     count = 0
     el_index = 0
     for element in list_note:
@@ -54,11 +58,12 @@ def search_by_id(path):
     elif count == 1:
         print("------------------------------")
         print(f"Было найдена заметка с ID {searching_id}")
-        File_operation.output_element_to_console(list_note[el_index])
+        FileOperation.output_element_to_console(list_note[el_index])
+
 
 def search_by_date(path):
     searching_date = input("Введите дату создания/изменения искомой заметки в формате dd.mm.yyyy :\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     result_list = []
     for element in list_note:
         if element["Дата создания/изменения"] == searching_date:
@@ -67,9 +72,10 @@ def search_by_date(path):
         print("Не найдено заметок с заданной датой!")
     output_list_to_console(result_list)
 
+
 def search_by_occurrence(path):
     answer_from_user = input("Введите слово которое должно содержаться в составе заметки:\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     result_list = []
     for element in list_note:
         if answer_from_user in element["Название заметки"]:
@@ -81,9 +87,10 @@ def search_by_occurrence(path):
     else:
         output_list_to_console(result_list)
 
+
 def remove_by_title(path):
     title = input("Введите название заметки которую хотите удалить:\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     count = 0
     el_index = 0
     for element in list_note:
@@ -104,9 +111,10 @@ def remove_by_title(path):
                 print(element)
         remove_by_id(path)
 
+
 def remove_by_id(path):
     being_deleted_id = input("Введите ID заметки которую необходимо удалить:\n")
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     for element in list_note:
         if element["ID"] == being_deleted_id:
             el_index = list_note.index(element)
@@ -115,19 +123,21 @@ def remove_by_id(path):
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
 
+
 def change_note(path):
     search_by_title(path)
-    list_note = File_operation.read_file(path)
+    list_note = FileOperation.read_file(path)
     id_note = input("Введите ID заметки для редактирования:\n")
     for element in list_note:
         if element["ID"] == id_note:
             element["Содержание заметки"] = input("Введите новое содержание заметки:\n")
             element["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
             element["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
-            File_operation.output_element_to_console(element)
+            FileOperation.output_element_to_console(element)
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
 
+
 def output_list_to_console(some_list):
     for element in some_list:
-        File_operation.output_element_to_console(element)
+        FileOperation.output_element_to_console(element)
