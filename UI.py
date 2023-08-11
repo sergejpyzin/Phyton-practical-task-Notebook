@@ -17,13 +17,16 @@ def greeting():
         print("\033[3m\033[31m{}\033[0m".format("Введенный номер пукта меню несуществует! Попробуйте ещё раз."))
         greeting()
 
+
 def menu():
     if FileOperation.is_accessible("Notebook.json", mode="r"):
         choice_menu()
     else:
-        print("\033[3m\033[31m{}\033[0m".format("Файла для сохранения заметок несуществует! Создайте хотя бы одну заметку."))
+        print("\033[3m\033[31m{}\033[0m".format(
+            "Файла для сохранения заметок несуществует! Создайте хотя бы одну заметку."))
         NoteOperation.create_note()
         choice_menu()
+
 
 def choice_menu():
     print("========================================================")
@@ -46,9 +49,11 @@ def choice_menu():
         print("\033[3m\033[31m{}\033[0m".format("Введённый номер пукта меню несуществует! Попробуйте ещё раз."))
         choice_menu()
 
+
 def create_menu():
     FileOperation.write_note_in_file("Notebook.json")
     choice_menu()
+
 
 def read_note_menu():
     if FileOperation.file_is_empty("Notebook.json"):
@@ -57,12 +62,14 @@ def read_note_menu():
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
 
+
 def remove_menu():
     if FileOperation.file_is_empty("Notebook.json"):
         NoteOperation.remove_by_title("Notebook.json")
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
+
 
 def change_note_menu():
     if FileOperation.file_is_empty("Notebook.json"):
@@ -72,6 +79,7 @@ def change_note_menu():
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
+
 
 def search_menu():
     print("+++++++++++++++++++++++++++++++++++++++")
