@@ -64,3 +64,11 @@ def remove_menu():
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
 
+def change_note_menu():
+    if FileOperation.file_is_empty("Notebook.json"):
+        print("Вы вошли в меню операции по изменению заметок")
+        NoteOperation.change_note("Notebook.json")
+        search_menu()
+    else:
+        print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
+    choice_menu()
