@@ -1,3 +1,5 @@
+import json
+
 import Note
 
 
@@ -86,3 +88,14 @@ def remove_by_title(path):
             if element["Название заметки"] == title.casefold():
                 print(element)
         remove_by_id(path)
+
+def remove_by_id(path):
+    being_deleted_id = input("Введите ID заметки которую необходимо удалить:\n")
+    list_note = File_operation.read_file(path)
+    for element in list_note:
+        if element["ID"] == being_deleted_id:
+            el_index = list_note.index(element)
+            list_note.pop(el_index)
+            print(f"Заметка с ID {being_deleted_id} удалена")
+    with open(path, "w") as fr:
+        json.dump(list_note, fr, ensure_ascii=False, indent=2)
