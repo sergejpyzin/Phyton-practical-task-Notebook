@@ -49,3 +49,10 @@ def choice_menu():
 def create_menu():
     FileOperation.write_note_in_file("Notebook.json")
     choice_menu()
+
+def read_note_menu():
+    if FileOperation.file_is_empty("Notebook.json"):
+        FileOperation.output_list_note_to_console("Notebook.json")
+    else:
+        print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
+    choice_menu()
