@@ -1,3 +1,4 @@
+import json
 import os
 
 
@@ -21,3 +22,8 @@ def is_accessible(path, mode="r"):
     except:
         return False
     return True
+
+def read_file(path):
+    if file_exists(path):
+        with open(path) as file:
+            return json.load(file)
