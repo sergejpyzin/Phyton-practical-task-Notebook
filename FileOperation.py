@@ -5,11 +5,15 @@ import NoteOperation
 
 
 def file_is_empty(path):
+    """Метод file_is_empty проверяет имеется ли в файле информация. Принимает на вход путь к файлу.
+    Если длинна файла неравна нулю возвращает True, в протиположном случае возвращает False"""
     if file_exists(path):
         return os.stat(path).st_size != 0
 
 
 def file_exists(path):
+    """Mетод file_exists проверяет существование файла. Принимает на вход путь к файлу.
+    Если необходимый файл существует возвращает True, в протиположном случае возвращает False"""
     try:
         os.stat(path)
     except OSError:
