@@ -131,7 +131,7 @@ def remove_by_title(path):
     count = 0
     el_index = 0
     for element in list_note:
-        if element["Название заметки"] == title.casefold():
+        if element["Название заметки"] == title:
             count += 1
             el_index = list_note.index(element)
     if count == 0:
@@ -144,7 +144,7 @@ def remove_by_title(path):
     else:
         print(f"Было найдено {count} заметок с названием '{title}'")
         for element in list_note:
-            if element["Название заметки"] == title.casefold():
+            if element["Название заметки"] == title:
                 print(element)
         remove_by_id(path)
 
