@@ -164,15 +164,18 @@ def remove_by_id(path):
 
 def change_note(path):
     """Метод change_note выполняет изменение содержания заметки по её названию. Принимает на вход путь к файлу"""
-    search_by_title(path)
     list_note = read_file(path)
-    id_note = input("Введите ID заметки для редактирования:\n")
+    title_note = input("Введите название заметки для редактирования:\n")
+    count = 0
     for element in list_note:
-        if element["ID"] == id_note:
+        if element["Название заметки"] == title_note:
             element["Содержание заметки"] = input("Введите новое содержание заметки:\n")
             element["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
             element["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
             output_element_to_console(element)
+            count += 1
+    if count == 0:
+        print("\033[3m\033[31m{}\033[0m".format("Не найдено заметок с заданным названием"))
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
 

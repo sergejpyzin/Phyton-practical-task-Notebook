@@ -26,7 +26,7 @@ def menu():
     else:
         print("\033[3m\033[31m{}\033[0m".format(
             "Файла для сохранения заметок несуществует! Создайте хотя бы одну заметку."))
-        NoteOperation.create_note()
+        FileOperation.write_note_in_file("Notebook.json")
         choice_menu()
 
 
@@ -82,7 +82,6 @@ def change_note_menu():
     if FileOperation.file_is_empty("Notebook.json"):
         print("Вы вошли в меню операции по изменению заметок")
         FileOperation.change_note("Notebook.json")
-        search_menu()
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
