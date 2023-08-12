@@ -20,16 +20,6 @@ def file_exists(path):
         return False
     return True
 
-
-def is_accessible(path, mode="r"):
-    try:
-        file = open(path, mode)
-        file.close()
-    except FileNotFoundError:
-        return False
-    return True
-
-
 def read_file(path):
     if file_exists(path):
         with open(path) as file:
