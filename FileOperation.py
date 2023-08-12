@@ -21,12 +21,14 @@ def file_exists(path):
     return True
 
 def read_file(path):
+    """Метод read_file считывает информацию из файла. Принимает на вход путь к файлу. Возвращает json-строку."""
     if file_exists(path):
         with open(path) as file:
             return json.load(file)
 
 
 def write_note_in_file(path):
+    """Метод write_file записывает информацию в файл. Принимает на вход путь к файлу."""
     if file_is_empty(path):
         with open(path) as fr:
             list_obj = json.load(fr)
@@ -39,6 +41,8 @@ def write_note_in_file(path):
 
 
 def create_file(path):
+    """Метод create_file создает файл по указанному пути. Принимает на вход путь к файлу.
+    Если создание не получилось выдает сообщение."""
     try:
         file = open(path, "w+")
         file.close()
@@ -47,12 +51,15 @@ def create_file(path):
 
 
 def output_list_note_to_console(path):
+    """Метод output_list_note_to_console выводит на косоль список словарей. Принимает на вход путь к файлу."""
     list_note = read_file(path)
     for element in list_note:
         output_element_to_console(element)
 
 
 def output_element_to_console(element):
+    """Метод output_element_to_console выводит словарь на печать в заданном формате.
+    Принимает на вход элемент списка словарей"""
     print(f'ID {element["ID"]}, Заметка {element["Название заметки"]}\n '
           f'\tТекст заметки: {element["Содержание заметки"]}'
           f'\n\tДата создания/изменения: {element["Дата создания/изменения"]}, '
