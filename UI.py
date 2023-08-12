@@ -65,7 +65,7 @@ def read_note_menu():
 
 def remove_menu():
     if FileOperation.file_is_empty("Notebook.json"):
-        NoteOperation.remove_by_title("Notebook.json")
+        FileOperation.remove_by_title("Notebook.json")
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
     choice_menu()
@@ -74,7 +74,7 @@ def remove_menu():
 def change_note_menu():
     if FileOperation.file_is_empty("Notebook.json"):
         print("Вы вошли в меню операции по изменению заметок")
-        NoteOperation.change_note("Notebook.json")
+        FileOperation.change_note("Notebook.json")
         search_menu()
     else:
         print("\033[3m\033[31m{}\033[0m".format("Файл заметок пуст! Создайте хотя бы одну заметку."))
@@ -88,11 +88,11 @@ def search_menu():
         answer_from_user = input("Введите номер операции(\n1 - поиск по названию записки\n"
                                  "2 - поиск по слову в составе заметки\n3 - поиск по дате создания/изменения):\n")
         if answer_from_user == "1":
-            NoteOperation.search_by_title("Notebook.json")
+            FileOperation.search_by_title("Notebook.json")
         elif answer_from_user == "2":
-            NoteOperation.search_by_occurrence("Notebook.json")
+            FileOperation.search_by_occurrence("Notebook.json")
         elif answer_from_user == "3":
-            NoteOperation.search_by_date("Notebook.json")
+            FileOperation.search_by_date("Notebook.json")
         else:
             print("\033[3m\033[31m{}\033[0m".format("Введенный номер пукта меню несуществует! Попробуйте ещё раз."))
             search_menu()
