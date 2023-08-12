@@ -3,6 +3,7 @@ import uuid
 
 
 class Note:
+    """Класс Note - класс инициализации заметок"""
     def __init__(self, title="Text", body="Text"):
         self.title = title
         self.id = str(uuid.uuid4())[0:6]
