@@ -19,7 +19,7 @@ def greeting():
 
 
 def menu():
-    if FileOperation.is_accessible("Notebook.json", mode="r"):
+    if FileOperation.file_exists("Notebook.json"):
         choice_menu()
     else:
         print("\033[3m\033[31m{}\033[0m".format(
