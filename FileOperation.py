@@ -166,16 +166,30 @@ def change_note(path):
     """Метод change_note выполняет изменение содержания заметки по её названию. Принимает на вход путь к файлу"""
     list_note = read_file(path)
     title_note = input("Введите название заметки для редактирования:\n")
-    count = 0
+    count, el_index = 0, 0
+    some_list = []
     for element in list_note:
         if element["Название заметки"] == title_note:
-            element["Содержание заметки"] = input("Введите новое содержание заметки:\n")
-            element["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
-            element["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
-            output_element_to_console(element)
+            el_index = list_note.index(element)
+            some_list.append(list_note[el_index])
             count += 1
     if count == 0:
         print("\033[3m\033[31m{}\033[0m".format("Не найдено заметок с заданным названием"))
+    elif count == 1:
+        some_dict = list_note[el_index]
+        some_dict["Содержание заметки"] = input("Введите новое содержание заметки:\n")
+        some_dict["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
+        some_dict["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
+        output_element_to_console(some_dict)
+    else:
+        output_list_to_console(some_list)
+        searching_id = input("Введите ID искомой заметки:\n")
+        for element in list_note:
+            if element["ID"] == searching_id:
+                element["Содержание заметки"] = input("Введите новое содержание заметки:\n")
+                element["Дата создания/изменения"] = str(datetime.today().strftime("%d.%m.%Y"))
+                element["Время создания/изменения"] = str(datetime.now().time().strftime("%H:%M:%S"))
+                output_element_to_console(element)
     with open(path, "w") as fr:
         json.dump(list_note, fr, ensure_ascii=False, indent=2)
 
