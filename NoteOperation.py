@@ -1,7 +1,4 @@
-import json
-from datetime import datetime
 
-import FileOperation
 import Note
 
 
@@ -22,9 +19,3 @@ def create_note():
     print("-------------------------------------------")
     print(f"Заметка с наименованием {title} создана")
     return Note.Note(title=title, body=body)
-
-
-
-
-
-
